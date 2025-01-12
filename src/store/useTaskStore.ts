@@ -1,47 +1,60 @@
 import { create } from 'zustand';
 import { Task } from '../types/Task';
 import { TaskStore } from '../types/TaskStore';
+import { persist } from 'zustand/middleware';
 
 
 const generateId = () => {
     return crypto.randomUUID();
 };
 
-export const useTaskStore = create<TaskStore>((set) => ({
-    tasks: [],
-    filterType: 'all',
-    searchText: '',
-    
-    createTask: (task) => set((state) => ({
-        tasks: [...state.tasks, {
-            ...task,
-            id: generateId(),
-            completed: false
-        }]
-    })),
 
-    editTask: (id, updatedTask) => set((state) => ({
-        tasks: state.tasks.map((task: Task) => 
-            task.id === id ? { ...task, ...updatedTask } : task
-        )
-    })),
+export const useTaskStore = create<TaskStore>()(
+    persist(
+        (set) => ({
+            tasks: [],
+            filterType: 'all',
+            searchText: '',
+            
+            createTask: (task) => set((state) => ({
+                tasks: [...state.tasks, {
+                    ...task,
+                    id: generateId(),
+                    completed: false
+                }]
+            })),
 
-    deleteTask: (id) => set((state) => ({
-        tasks: state.tasks.filter((task: Task) => task.id !== id)
-    })),
+            editTask: (id, updatedTask) => set((state) => ({
+                tasks: state.tasks.map((task: Task) => 
+                    task.id === id ? { ...task, ...updatedTask } : task
+                )
+            })),
 
-    markAllAsCompleted: () => set((state) => ({
-        tasks: state.tasks.map((task: Task) => ({ ...task, completed: true }))
-    })),
+            deleteTask: (id) => set((state) => ({
+                tasks: state.tasks.filter((task: Task) => task.id !== id)
+            })),
 
-    deleteCompletedTasks: () => set((state) => ({
-        tasks: state.tasks.filter((task: Task) => !task.completed)
-    })),
+            markAllAsCompleted: () => set((state) => ({
+                tasks: state.tasks.map((task: Task) => ({ ...task, completed: true }))
+            })),
 
-    setFilterType: (filter) => set({ filterType: filter }),
+            deleteCompletedTasks: () => set((state) => ({
+                tasks: state.tasks.filter((task: Task) => !task.completed)
+            })),
 
-    setSearchText: (text: string) => set({ searchText: text })
-}));
+            setFilterType: (filter) => set({ filterType: filter }),
+            
+            setSearchText: (text) => set({ searchText: text })
+        }),
+        {
+            name: 'task-storage',
+            skipHydration: false,
+            partialize: (state) => ({ 
+                tasks: state.tasks
+            })
+        }
+    )
+);
 
 export const selectFilteredTasks = (state: TaskStore): Task[] => {
     const textFiltered = state.searchText
