@@ -6,7 +6,6 @@ const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   
-  // Obtendo as ações do store
   const { createTask, editTask } = useTaskStore();
 
   useEffect(() => {

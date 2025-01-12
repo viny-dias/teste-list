@@ -5,16 +5,23 @@ import TaskItem from './TaskItem';
 const TaskList = ({ onEdit }: TaskListProps) => {
     const tasks = useTaskStore(state => state.tasks);
     const filterType = useTaskStore(state => state.filterType);
+    const searchText = useTaskStore(state => state.searchText);
     
     const filteredTasks = tasks.filter(task => {
-        switch (filterType) {
-            case 'completed':
-                return task.completed;
-            case 'uncompleted':
-                return !task.completed;
-            default:
-                return true;
-        }
+        // Text filter
+        const matchesSearch = searchText 
+            ? task.title.toLowerCase().includes(searchText.toLowerCase()) ||
+              task.content.toLowerCase().includes(searchText.toLowerCase())
+            : true;
+
+        // Status filter
+        const matchesStatus = filterType === 'all' 
+            ? true 
+            : filterType === 'completed' 
+                ? task.completed 
+                : !task.completed;
+
+        return matchesSearch && matchesStatus;
     });
 
     if (filteredTasks.length === 0) {

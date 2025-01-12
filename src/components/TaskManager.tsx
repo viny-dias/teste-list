@@ -2,6 +2,7 @@ import { useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import TaskFilter from "./TaskFilter";
+import TaskSearch from "./TaskSearch";
 import { Task } from "../store/useTaskStore";
 
 export function TaskManager() {
@@ -13,6 +14,7 @@ export function TaskManager() {
                 editingTask={editingTask}
                 setEditingTask={setEditingTask}
             />
+            <TaskSearch />
             <TaskFilter />
             <TaskList 
                 onEdit={setEditingTask}
