@@ -1,9 +1,13 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { TaskFormProps } from '../types/TaskFormProps';
+import { useTaskStore } from '../store/useTaskStore';
 
-const TaskForm = ({ onSubmit, onEdit, editingTask, setEditingTask }: TaskFormProps) => {
+const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  
+  // Obtendo as ações do store
+  const { createTask, editTask } = useTaskStore();
 
   useEffect(() => {
     if (editingTask) {
@@ -17,11 +21,18 @@ const TaskForm = ({ onSubmit, onEdit, editingTask, setEditingTask }: TaskFormPro
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (editingTask && onEdit) {
-        onEdit(title, content, editingTask.id);
+    
+    if (!title.trim() || !content.trim()) return;
+
+    if (editingTask) {
+      editTask(editingTask.id, { title, content });
+      setEditingTask(null);
     } else {
-        onSubmit(title, content);
+      createTask({ title, content });
     }
+
+    setTitle('');
+    setContent('');
   };
 
   return (
@@ -34,6 +45,7 @@ const TaskForm = ({ onSubmit, onEdit, editingTask, setEditingTask }: TaskFormPro
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
         />
       </div>
       <div className="mb-4">
@@ -43,6 +55,7 @@ const TaskForm = ({ onSubmit, onEdit, editingTask, setEditingTask }: TaskFormPro
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
         />
       </div>
       <div className="flex items-center space-x-4">
