@@ -8,6 +8,7 @@ const generateId = () => {
 
 export const useTaskStore = create<TaskStore>((set) => ({
     tasks: [],
+    filterCompleted: false,
     
     createTask: (task) => set((state) => ({
         tasks: [...state.tasks, {
@@ -18,22 +19,32 @@ export const useTaskStore = create<TaskStore>((set) => ({
     })),
 
     editTask: (id, updatedTask) => set((state) => ({
-        tasks: state.tasks.map(task => 
+        tasks: state.tasks.map((task: Task) => 
             task.id === id ? { ...task, ...updatedTask } : task
         )
     })),
 
     deleteTask: (id) => set((state) => ({
-        tasks: state.tasks.filter(task => task.id !== id)
+        tasks: state.tasks.filter((task: Task) => task.id !== id)
     })),
 
     markAllAsCompleted: () => set((state) => ({
-        tasks: state.tasks.map(task => ({ ...task, completed: true }))
+        tasks: state.tasks.map((task: Task) => ({ ...task, completed: true }))
     })),
 
     deleteCompletedTasks: () => set((state) => ({
-        tasks: state.tasks.filter(task => !task.completed)
+        tasks: state.tasks.filter((task: Task) => !task.completed)
+    })),
+
+    toggleCompletedFilter: () => set((state) => ({
+        filterCompleted: !state.filterCompleted
     }))
 }));
+
+export const selectFilteredTasks = (state: TaskStore): Task[] => {
+    return state.filterCompleted 
+        ? state.tasks.filter(task => task.completed) 
+        : state.tasks;
+};
 
 export type { Task };
