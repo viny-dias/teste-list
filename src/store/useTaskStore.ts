@@ -1,6 +1,17 @@
 import { create } from 'zustand';
 import { Task } from '../types/Task';
-import { TaskStore } from '../types/TaskStore';
+import { TaskFilterType } from '../types/TaskFilterType';
+
+interface TaskStore {
+    tasks: Task[];
+    filterType: TaskFilterType;
+    createTask: (task: Omit<Task, 'id' | 'completed'>) => void;
+    editTask: (id: string, updatedTask: Partial<Task>) => void;
+    deleteTask: (id: string) => void;
+    markAllAsCompleted: () => void;
+    deleteCompletedTasks: () => void;
+    setFilterType: (filter: TaskFilterType) => void;
+}
 
 const generateId = () => {
     return crypto.randomUUID();
@@ -8,7 +19,7 @@ const generateId = () => {
 
 export const useTaskStore = create<TaskStore>((set) => ({
     tasks: [],
-    filterCompleted: false,
+    filterType: 'all',
     
     createTask: (task) => set((state) => ({
         tasks: [...state.tasks, {
@@ -36,15 +47,18 @@ export const useTaskStore = create<TaskStore>((set) => ({
         tasks: state.tasks.filter((task: Task) => !task.completed)
     })),
 
-    toggleCompletedFilter: () => set((state) => ({
-        filterCompleted: !state.filterCompleted
-    }))
+    setFilterType: (filter) => set({ filterType: filter })
 }));
 
 export const selectFilteredTasks = (state: TaskStore): Task[] => {
-    return state.filterCompleted 
-        ? state.tasks.filter(task => task.completed) 
-        : state.tasks;
+    switch (state.filterType) {
+        case 'completed':
+            return state.tasks.filter(task => task.completed);
+        case 'uncompleted':
+            return state.tasks.filter(task => !task.completed);
+        default:
+            return state.tasks;
+    }
 };
 
 export type { Task };
