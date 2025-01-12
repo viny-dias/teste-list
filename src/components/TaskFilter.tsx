@@ -15,7 +15,7 @@ const TaskFilter = () => {
 
     return (
         <>
-            <h2 className="block text-gray-700 font-bold mb-4">Filtro de tarefas</h2>
+            <h2 className="block text-gray-700 font-bold mb-4">Filtro por status</h2>
             <div className="mb-4 flex flex-wrap gap-2">
 
                 <button

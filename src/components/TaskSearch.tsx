@@ -11,15 +11,18 @@ const TaskSearch = () => {
     };
 
     return (
-        <div className="mb-4">
-            <input
-                type="text"
-                placeholder="Buscar tarefas..."
-                value={searchText}
-                onChange={handleSearch}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-        </div>
+        <>
+            <label className="block text-gray-700 font-bold mb-4">Filtro por texto</label>
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar tarefas..."
+                    value={searchText}
+                    onChange={handleSearch}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
+        </>
     );
 };
 
