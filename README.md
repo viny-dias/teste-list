@@ -1,34 +1,115 @@
-# Lista de Tarefas (To-Do List)
+# ✅ Lista de Tarefas (To-Do List)
 
-Este projeto é um desafio técnico para avaliar as habilidades do desenvolvedor frontend.
+Uma aplicação moderna de lista de tarefas construída com React e TypeScript, focando em uma experiência de usuário fluida e persistência de dados.
 
-O objetivo é criar uma aplicação web funcional e responsiva, utilizando boas práticas de desenvolvimento e ferramentas modernas.
+## 🚀 Tecnologias Utilizadas
 
-A aplicação consiste em um app de lista de tarefas, para auxiliar o usuário a organizar suas atividades diárias.
+- [React](https://reactjs.org/) - Biblioteca para interfaces de usuário
+- [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação fortemente tipada que se baseia em JavaScript
+- [Zustand](https://zustand-demo.pmnd.rs/) - Gerenciamento de estado
+- [TailwindCSS](https://tailwindcss.com/) - Estilização
+- [Vitest](https://vitest.dev/) - Framework de testes
 
-## Tarefas
+## ✨ Funcionalidades
 
-- [ ] **Componentização**: Componentizar a aplicação para melhorar a organização e reutilização de código
-- [ ] **Organização de pastas e arquivos**: Certifique-se de que o projeto segue uma estrutura clara e escalável, como separar componentes, estilos, serviços e utilitários
-- [ ] **Persistência de dados**: Implementar uma forma de persistir os dados das tarefas, mesmo após o recarregamento da página
-- [ ] **Edição de tarefas**: Adicionar funcionalidade para editar tarefas existentes
-- [ ] **Filtros de visualização**: Implementar filtros para a visualização de tarefas:
-  - [ ] Apenas tarefas concluídas
-  - [ ] Apenas tarefas não concluídas
-  - [ ] Filtrar tarefas por texto
-- [ ] **Estilização**: Melhorar a estilização da aplicação utilizando uma biblioteca de CSS moderna (TailwindCSS, MaterialUI, etc)
-- [ ] **Ações em tarefas**: Implementar ações nas tarefas:
-  - [ ] Marcar todas as tarefas como concluídas
-  - [ ] Excluir todas as tarefas concluídas
-- [ ] **Testes**: Adicionar testes unitários para garantir a qualidade do código
-- [ ] **TypeScript**: Utilizar TypeScript para adicionar tipagem ao código
+### Gerenciamento de Tarefas
+- ✏️ Criação de novas tarefas
+- 🔄 Edição de tarefas existentes
+- ✅ Marcação de tarefas como concluídas/não concluídas
+- 🗑️ Remoção de tarefas
 
-## Ideias Extras
+### Filtros e Visualização
+- 👁️ Visualização de todas as tarefas
+- ✅ Filtro de tarefas concluídas
+- ⏳ Filtro de tarefas pendentes
+- 🔍 Busca de tarefas por texto
 
-- [ ] **Gerenciamento de estado**: Utilizar uma solução de gerenciamento de estado global (Redux, Context API, Zustand, etc)
-- [ ] **Responsividade**: Tornar a aplicação responsiva para dispositivos móveis
-- [ ] **Dark Mode**: Adicionar um tema escuro para a aplicação
-- [ ] **Ordenação de tarefas**: Implementar funcionalidade para ordenar as tarefas por data de criação, data de conclusão, etc
-- [ ] **Animações**: Implementar animações para melhorar a experiência do usuário
-- [ ] **Internacionalização**: Adicionar suporte a múltiplos idiomas na aplicação
-- [ ] **Drag and Drop**: Implementar funcionalidade de arrastar e soltar para reordenar tarefas
+### Persistência
+- 💾 Dados salvos localmente
+- 🔄 Mantém o estado mesmo após recarregar a página
+
+## 🔧 Instalação e Uso
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/viny-dias/teste-list
+```
+
+2. Instale as dependências:
+```bash
+cd todo-list
+npm install
+```
+
+3. Execute o projeto:
+```bash
+npm run dev
+```
+
+4. Para rodar os testes:
+```bash
+npm run test
+```
+
+## 🏗️ Estrutura do Projeto
+
+```
+TESTE-LIST/
+├── src/
+│   ├── components/     # Componentes da aplicação
+│   ├── store/         # Configuração do Zustand
+│   ├── styles/        # Estilos Tailwind
+│   ├── test/          # Testes unitários
+│   ├── types/         # Definições de tipos TypeScript
+│   ├── App.tsx        # Componente principal
+│   └── main.tsx       # Ponto de entrada da aplicação
+├── setup.ts           # Configurações iniciais
+├── vite.config.ts     # Configuração do Vite
+├── vitest.config.ts   # Configuração do Vitest
+├── tailwind.config.js # Configuração do Tailwind
+├── tsconfig.json      # Configuração do TypeScript
+└── package.json       # Dependências e scripts
+```
+
+## 💡 Destaques Técnicos
+
+### Zustand
+- Gerenciamento de estado simples e eficiente
+- Persistência de dados com middleware persist
+- Ações e seletores bem definidos
+- Performance otimizada
+
+### TypeScript
+- Tipagem forte para maior segurança
+- Interfaces bem definidas
+- Melhor experiência de desenvolvimento
+
+### TailwindCSS
+- Estilização moderna e responsiva
+- Customização flexível
+- Otimização de performance
+
+## 🧪 Testes
+
+O projeto inclui testes unitários implementados com Vitest, cobrindo:
+- Filtro
+- Funcionalidades do Formulário
+- Lista de itens
+- Item da lista
+
+Para executar os testes:
+```bash
+npm run test
+```
+
+## 📝 Considerações de Desenvolvimento
+
+- **Clean Code**: Código limpo e bem organizado
+- **Estado Global**: Gerenciamento eficiente com Zustand
+- **Persistência**: Dados salvos localmente usando persist middleware
+- **Performance**: Otimizações de renderização
+- **UX**: Interface intuitiva e responsiva
+
+---
+
+Desenvolvido por [Vinicius Dias](https://github.com/viny-dias) 🚀
