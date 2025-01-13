@@ -8,7 +8,7 @@ describe('TaskList', () => {
     { id: '2', title: 'Tarefa 2', content: 'Conteúdo 2', completed: true }
   ];
 
-  test('deve renderizar lista de tarefas corretamente', () => {
+  test('should render task list correctly', () => {
     const mockOnEdit = vi.fn();
 
     render(
@@ -24,7 +24,7 @@ describe('TaskList', () => {
     expect(screen.getByText('Tarefa 2')).toBeInTheDocument();
   });
 
-  test('deve mostrar mensagem quando não há tarefas', () => {
+  test('should show message when there are no tasks', () => {
     render(
       <TaskList 
         tasks={[]}

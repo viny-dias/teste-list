@@ -3,7 +3,6 @@ import { describe, test, expect, vi, beforeEach } from 'vitest';
 import TaskForm from '../components/TaskForm';
 import userEvent from '@testing-library/user-event';
 
-// Mock do useTaskStore
 vi.mock('../store/taskStore', () => ({
   useTaskStore: () => ({
     createTask: vi.fn(),
@@ -18,7 +17,7 @@ describe('TaskForm', () => {
     vi.clearAllMocks();
   });
 
-  test('deve renderizar o formulário para criar nova tarefa', () => {
+  test('must render form to create new task', () => {
     render(<TaskForm editingTask={null} setEditingTask={mockSetEditingTask} />);
 
     expect(screen.getByTestId('title-input')).toBeInTheDocument();
@@ -27,7 +26,7 @@ describe('TaskForm', () => {
     expect(screen.queryByText('Cancelar')).not.toBeInTheDocument();
   });
 
-  test('deve renderizar o formulário para editar tarefa existente', () => {
+  test('must render form to edit existing task', () => {
     const mockTask = {
       id: '1',
       title: 'Tarefa Teste',
@@ -43,7 +42,7 @@ describe('TaskForm', () => {
     expect(screen.getByText('Cancelar')).toBeInTheDocument();
   });
 
-  test('deve limpar o formulário ao clicar em cancelar', async () => {
+  test('you must clear the form when clicking cancel', async () => {
     const mockTask = {
       id: '1',
       title: 'Tarefa Teste',

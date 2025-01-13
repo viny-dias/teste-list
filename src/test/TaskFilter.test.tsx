@@ -20,7 +20,7 @@ const renderWithStore = (ui, store) => {
 };
 
 describe('TaskFilter', () => {
-    test('renderiza filtros com estado inicial', () => {
+    test('render filters with initial state', () => {
         const store = createTestStore();
         renderWithStore(<TaskFilter />, store);
         
@@ -29,7 +29,7 @@ describe('TaskFilter', () => {
         expect(screen.getByText('Não Concluídas')).toBeInTheDocument();
     });
 
-    test('inicia com filtro específico', () => {
+    test('starts with specific filter', () => {
         const store = createTestStore({ filterType: 'completed' });
         renderWithStore(<TaskFilter />, store);
         
