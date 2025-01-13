@@ -39,6 +39,7 @@ const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Título</label>
         <input
+          data-testid="title-input"
           type="text"
           placeholder="Título"
           value={title}
@@ -50,6 +51,7 @@ const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Conteúdo</label>
         <textarea
+          data-testid="content-input"
           placeholder="Conteúdo"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -59,6 +61,7 @@ const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
       </div>
       <div className="flex items-center space-x-4">
         <button
+          data-testid="submit-button"
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
         >
@@ -66,6 +69,7 @@ const TaskForm = ({ editingTask, setEditingTask }: TaskFormProps) => {
         </button>
         {editingTask && (
           <button
+            data-testid="cancel-button"
             type="button"
             onClick={() => setEditingTask(null)}
             className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"

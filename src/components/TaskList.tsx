@@ -1,11 +1,7 @@
 import { TaskListProps } from '../types/TaskListProps';
-import { useTaskStore } from '../store/useTaskStore';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ onEdit }: TaskListProps) => {
-    const tasks = useTaskStore(state => state.tasks);
-    const filterType = useTaskStore(state => state.filterType);
-    const searchText = useTaskStore(state => state.searchText);
+const TaskList = ({ tasks, filterType, searchText, onEdit }: TaskListProps) => {
     
     const filteredTasks = tasks.filter(task => {
         // Text filter
